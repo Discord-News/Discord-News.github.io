@@ -4,185 +4,560 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:title" content="Discord News">
-    <meta property="og:description" content="Stay ahead with our guides, discord news, bots, and datamines related to the #1 e-girls app :lol: .">
-    <meta property="og:image" content="https://media.discordapp.net/attachments/1353873410211581976/1368218206166057051/mascot.png?ex=68176c00&is=68161a80&hm=395b17759516f3b170bb872a6efd96ef249327674be2951f9e6092d16e437e37&=&format=webp&quality=lossless&width=600&height=900">
+    <meta property="og:description" content="Discover, collect, and learn from our guides. Explore thousands of articles in a paper format about various topics (Discord Guides, News, AI, DataMine ...).">
+    <meta property="og:image" content="https://media.discordapp.net/attachments/1256382020498489407/1373702671583940638/bubble.png?ex=682b5fcf&is=682a0e4f&hm=0cf73b775358a3b77d491faaaa8d40faa6b7ffe6cb48fdc6d10b65661d0da5b4&=&format=webp&quality=lossless&width=750&height=750">
     <meta property="og:url" content="https://discord-news.xyz">
     <link rel="icon" href="pics/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="assets/style.css">
     <title>Discord News</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #d4a76a;
+            --secondary-color: #f9f5eb;
+            --text-color: #5a4a42;
+            --accent-color: #8b5a2b;
+            --card-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #f5f0e1;
+            color: var(--text-color);
+            line-height: 1.6;
+            font-family: "Times New Roman", Times, serif;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #d9cbc3;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 30px;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Hero Section */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 50px 0;
+            position: relative;
+            min-height: 500px;
+        }
+        
+        .hero-content {
+            flex: 1;
+            padding-right: 50px;
+        }
+        
+        .hero-title {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        .hero-description {
+            font-size: 18px;
+            margin-bottom: 40px;
+            color: #555;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: #c49a6c;
+        }
+        
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .floating-tree {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 70px 0;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .feature-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            transition: var(--transition);
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        .feature-item:hover .feature-icon {
+            transform: scale(1.1);
+        }
+        
+        .feature-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .feature-description {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .showcase {
+            margin: 70px 0;
+            padding: 50px 0;
+            border-radius: 10px;
+        }
+        
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #333;
+        }
+        
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .showcase-item {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .showcase-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .showcase-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .showcase-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .showcase-item-content {
+            padding: 20px;
+        }
+        
+        .showcase-item h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
+        
+        .showcase-item p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .testimonials {
+            padding: 70px 0;
+            margin: 70px 0;
+        }
+        
+        .testimonial-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .testimonial-text {
+            font-size: 20px;
+            font-style: italic;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .floating-books {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .floating-book {
+            position: absolute;
+            width: 120px;
+            height: 160px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            animation: float 15s ease-in-out infinite;
+            opacity: 0.2;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-content {
+                padding-right: 0;
+                margin-bottom: 40px;
+            }
+            
+            .hero-title {
+                font-size: 36px;
+            }
+            
+            .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero, .features, .showcase, .testimonials {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .hero {
+            animation-delay: 0.2s;
+        }
+        
+        .features {
+            animation-delay: 0.4s;
+        }
+        
+        .showcase {
+            animation-delay: 0.6s;
+        }
+        
+        .testimonials {
+            animation-delay: 0.8s;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">Discord News</div>
-                <nav>
-                    <ul>
-                        <li><a href="index.html" style="color: var(--primary);">Home</a></li>
-                        <li><a href="articles.html">Articles</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </nav>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <img src="3dgifmaker89806.gif" alt="Logo">
+                <span class="logo-text">Discord News</span>
             </div>
+            <ul class="nav-menu">
+                <li><a href="#">Papers</a></li>
+                <li><a href="#">Authors</a></li>
+                <li><a href="#">Topics</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
         </div>
-    </header>
-
-    <section class="hero">
-        <div class="container">
+        
+        <div class="hero">
             <div class="hero-content">
-                <div class="hero-text">
-                    <h1>Discord DataMines, Bots and Security.</h1>
-                    <p>Stay ahead with our guides, discord news, bots, and datamines related to the #1 e-girls app :lol: .</p>
-                </div>
-                <div class="hero-image">
-                    <img src="pics/mascot.png" alt="Discord News Mascot" class="mascot-img">
-                </div>
+                <h1 class="hero-title">Your Personal Library</h1>
+                <p class="hero-description">Discover, collect, and learn from our guides. Explore thousands of articles in a paper format about various topics (Discord Guides, News, AI, DataMine ...).</p>
+                <a href="#" class="cta-button">Start Exploring</a>
+            </div>
+            <div class="hero-image">
+                <img src="bubble.png" alt="Floating Tree" class="floating-tree">
             </div>
         </div>
-    </section>
-
-    <section class="featured">
-        <div class="container">
-            <h2 class="section-title">Featured Articles</h2>
-            <div class="articles-grid">
-                <div class="article-card" data-category="News">
-                    <img src="https://placehold.co/400x300/111827/ffffff?text=Tags" alt="AR/VR" class="article-img">
-                    <div class="article-content">
-                        <span class="article-category">News</span>
-                        <h3 class="article-title">Discord Server Tags List</h3>
-                        <p>Discord deleted guild tags, and made them available for more people by making it a perk for boosted servers. In this article, we'll explore the list of servers that have one, in other acticles we may talk more about this new feature.</p>
-                        <div class="article-meta">
-                            <div class="article-author">
-                                <img src="pics/akeanti.png" alt="Author" class="author-avatar">
-                                <span>Akeanti</span>
-                            </div>
-                            <span>May 06, 2025</span>
-                        </div>
-                        <div class="read-more-container">
-                            <a href="https://tags.discord-news.xyz/" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
+        
+        <div class="features">
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fa-solid fa-book" style="font-size: 40px; color: #d4a76a;"></i>
                 </div>
-
-                <div class="article-card" data-category="arvr">
-                    <img src="https://placehold.co/400x300/111827/ffffff?text=Anti Raids" alt="anti" class="article-img">
-                    <div class="article-content">
-                        <span class="article-category">Guides</span>
-                        <h3 class="article-title">Anti Raid : Sever Security</h3>
-                        <p>The worst things that can happen to you is to have your discord server raided, this is the reason we made this article, to help you create a safe server no one can raid, using discord features and advanced bots : wick and beemo etc...</p>
-                        <div class="article-meta">
-                            <div class="article-author">
-                                <img src="pics/akeanti.png" alt="Author" class="author-avatar">
-                                <span>Akeanti</span>
-                            </div>
-                            <span>May 3, 2025</span>
-                        </div>
-                        <div class="read-more-container">
-                            <a href="#" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
+                <h3 class="feature-title">Extensive Collection</h3>
+                <p class="feature-description">Access thousands of papers across various topics and guides.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fa-solid fa-search" style="font-size: 40px; color: #d4a76a;"></i>
                 </div>
-
-                <div class="article-card" data-category="arvr">
-                    <img src="https://placehold.co/400x300/111827/ffffff?text=News" alt="AR/VR" class="article-img">
-                    <div class="article-content">
-                        <span class="article-category">News</span>
-                        <h3 class="article-title">Shapes.inc : Banned</h3>
-                        <p>Shapes is a plateform that helps you make ai bots, that can chat on your server etc... This org seems to have been banned for training Ai on the discord plateform, making all discord users who had a shape bot get an email.</p>
-                        <div class="article-meta">
-                            <div class="article-author">
-                                <img src="pics/akeanti.png" alt="Author" class="author-avatar">
-                                <span>Akeanti</span>
-                            </div>
-                            <span>May 3, 2025</span>                        </div>
-                        <div class="read-more-container">
-                            <a href="https://discord-news.xyz/shapes/shapes.html" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
+                <h3 class="feature-title">Powerful Search</h3>
+                <p class="feature-description">Find exactly what you need with our advanced search tools.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fa-solid fa-link" style="font-size: 40px; color: #d4a76a;"></i>
                 </div>
+                <h3 class="feature-title">Citation Management</h3>
+                <p class="feature-description">Easily manage citations and references for your research.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fa-solid fa-download" style="font-size: 40px; color: #d4a76a;"></i>
+                </div>
+                <h3 class="feature-title">Offline Access</h3>
+                <p class="feature-description">Download papers and access them offline anytime.</p>
             </div>
         </div>
-    </section>
-
-    <section class="featured-images">
-        <div class="container">
-            <h2 class="section-title">Explore Our World</h2>
-            <div class="image-grid">
-                <div class="featured-image-container">
-                    <img src="https://c4.wallpaperflare.com/wallpaper/426/251/789/anime-girl-images-wallpaper-preview.jpg" alt="Tech Innovation" class="featured-image">
-                    <div class="featured-image-overlay">
-                        <h3 class="featured-image-title">DataMines</h3>
-                        <p class="featured-image-desc">Discover the latest discord features</p>
+        
+        <div class="showcase">
+            <h2 class="section-title">Featured Research</h2>
+            
+            <div class="showcase-grid">
+                <div class="showcase-item">
+                    <img src="https://techissuestoday.com/wp-content/uploads/2025/05/discord-shapes-inc-logo.webp" alt="AI Research">
+                    <div class="showcase-item-content">
+                        <h3>Shapes.Inc</h3>
+                        <p>Discord banned all shapes bots, and deleted the company from using their API, as well as some issues with whatsapp.</p>
+                        <a href="https://pages.julpav.com/shapesdoc" class="cta-button">View Papers</a>
                     </div>
                 </div>
-                <div class="featured-image-container">
-                    <img src="https://wallpapers.com/images/hd/blue-anime-aesthetic-desktop-yyv4282vt9c7qhm5.jpg" alt="Digital Transformation" class="featured-image">
-                    <div class="featured-image-overlay">
-                        <h3 class="featured-image-title">Discord Reports</h3>
-                        <p class="featured-image-desc">Sharing info about bad communities to terminate them</p>
+                
+                <div class="showcase-item">
+                    <img src="https://storage.googleapis.com/breathecode-asset-images/9f0dfcac7485b60618e760410dfa3947e1394bdc76a9c0d458b90a7986a71db8.png?raw=true" alt="Computer Science">
+                    <div class="showcase-item-content">
+                        <h3>RegEx</h3>
+                        <p>Set up your discord automod with advanced RegEx values and a massive bad links database to make moderation easier.</p>
+                        <a href="#" class="cta-button">View Papers</a>
                     </div>
                 </div>
-                <div class="featured-image-container">
-                    <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ba97e144-5ecc-46d0-bfb0-13565a9b9c41/de334pc-f91d3d4e-0d6b-4600-8adb-4c3f69a8387e.jpg/v1/fill/w_1192,h_670,q_70,strp/anime_tech_themed_wallpaper_by_kojaku_kun_de334pc-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9OTE4IiwicGF0aCI6IlwvZlwvYmE5N2UxNDQtNWVjYy00NmQwLWJmYjAtMTM1NjVhOWI5YzQxXC9kZTMzNHBjLWY5MWQzZDRlLTBkNmItNDYwMC04YWRiLTRjM2Y2OWE4Mzg3ZS5qcGciLCJ3aWR0aCI6Ijw9MTYzMiJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.j4KwgswC99c4NqH_wAVpkUQ_qKHltiTjPSq89j4ZR0Y" alt="Future Tech" class="featured-image">
-                    <div class="featured-image-overlay">
-                        <h3 class="featured-image-title">Bots and Guides</h3>
-                        <p class="featured-image-desc">Discord guides to setup your discord server with best features</p>
+                
+                <div class="showcase-item">
+                    <img src="https://emailguard.io/warning-graphic.webp" alt="Data Science">
+                    <div class="showcase-item-content">
+                        <h3>Blacklisted Link</h3>
+                        <p>A discord bot with a massive discord database that bans nsfw, scam, url shortners and condo links from your discord server.</p>
+                        <a href="#" class="cta-button">View Papers</a>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <section class="categories">
-        <div class="container">
-            <h2 class="section-title">Explore Topics</h2>
-            <div class="category-tags">
-                <a href="#" class="category-tag"><i class="fas fa-robot"></i> Bots</a>
-                <a href="#" class="category-tag"><i class="fas fa-chain"></i> Guides</a>
-                <a href="#" class="category-tag"><i class="fas fa-shield-alt"></i> Security</a>
-                <a href="#" class="category-tag"><i class="fas fa-cloud"></i> News</a>
-                <a href="#" class="category-tag"><i class="fas fa-glasses"></i> Terminate</a>
-                <a href="#" class="category-tag"><i class="fas fa-rocket"></i> DataMines</a>
+        
+        <div class="testimonials">
+            <div class="testimonial-container">
+                <p class="testimonial-text">"Meow, meow meow meow, miaw miiiiiiawwww meow :3."</p>
+                <p class="testimonial-author">- Akeanti, Femboy</p>
             </div>
         </div>
-    </section>
+    </div>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>discord-news.xyz</h3>
-                    <p>Your source for staying up to date with the last discord features, and have the best guides to build a community.</p>
-                    <div class="social-links">
-                        <a href="https://akeanti.com/" class="social-icon"><i class="fas fa-cloud"></i></a>
-                        <a href="https://www.instagram.com/akeantie/" class="social-icon"><i class="fab fa-instagram"></i></a>
-                        <a href="https://github.com/akeanti" class="social-icon"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-column">
-                    <h3>Categories</h3>
-                    <ul>
-                        <li><a href="#">DataMines</a></li>
-                        <li><a href="#">Guides</a></li>
-                        <li><a href="#">Bots</a></li>
-                        <li><a href="#">News</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div class="floating-books" id="floatingBooks"></div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const bookCovers = [
+                'https://bukovero.com/wp-content/uploads/2016/07/Harry_Potter_and_the_Cursed_Child_Special_Rehearsal_Edition_Book_Cover.jpg ',
+                'https://framerusercontent.com/images/hA3xftZF37smTyudpnxnFzvXkrc.jpeg ',
+                'https://i.pinimg.com/736x/f5/52/74/f552748a1510dc20acc7c0505a76041f.jpg ',
+                'https://images.penguinrandomhouse.com/cover/9781718503281 ',
+                'https://m.media-amazon.com/images/I/71-comtOxIL.jpg '
+            ];
+            
+            const floatingBooksContainer = document.getElementById('floatingBooks');
+            
+            for (let i = 0; i < 5; i++) {
+                const book = document.createElement('div');
+                book.className = 'floating-book';
+                book.style.backgroundImage = `url(${bookCovers[i]})`;
+                
+                // I was drunk :D
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+                
+                const left = Math.max(10, Math.min(viewportWidth - 130, Math.random() * viewportWidth));
+                const top = Math.max(10, Math.min(viewportHeight - 170, Math.random() * viewportHeight));
+                
+                book.style.left = `${left}px`;
+                book.style.top = `${top}px`;
+                book.style.animationDelay = `${Math.random() * 5}s`;
+                book.style.transform = `rotate(${Math.random() * 10 - 5}deg)`;
+                
+                floatingBooksContainer.appendChild(book);
+            }
+            
+            // Handle window resize for floating books : I was drunk here too.
+            window.addEventListener('resize', function() {
+                floatingBooksContainer.innerHTML = '';
+                for (let i = 0; i < 5; i++) {
+                    const book = document.createElement('div');
+                    book.className = 'floating-book';
+                    book.style.backgroundImage = `url(${bookCovers[i]})`;
+                    
+                    const viewportWidth = window.innerWidth;
+                    const viewportHeight = window.innerHeight;
+                    
+                    const left = Math.max(10, Math.min(viewportWidth - 130, Math.random() * viewportWidth));
+                    const top = Math.max(10, Math.min(viewportHeight - 170, Math.random() * viewportHeight));
+                    
+                    book.style.left = `${left}px`;
+                    book.style.top = `${top}px`;
+                    book.style.animationDelay = `${Math.random() * 5}s`;
+                    book.style.transform = `rotate(${Math.random() * 10 - 5}deg)`;
+                    
+                    floatingBooksContainer.appendChild(book);
+                }
+            });
+            
+            // Scroll animation (to be remade)
+            const featureItems = document.querySelectorAll('.feature-item');
+            const showcaseItems = document.querySelectorAll('.showcase-item');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+            
+            featureItems.forEach(item => observer.observe(item));
+            showcaseItems.forEach(item => observer.observe(item));
+        });
+    </script>
 </body>
 </html>
